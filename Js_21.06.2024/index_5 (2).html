@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var n=prompt("Введите число");
+
+    function factorize(n, divisor = 2) {
+        //если n становится 1 возвращаем пустой массив
+        if (n === 1) {
+            return [];
+        }
+        if (n % divisor === 0) {
+            return [divisor].concat(factorize(n / divisor, divisor));
+        } else {
+            // Если делитель не подошел увеличиваем делитель и продолжаем
+            return factorize(n, divisor + 1);
+        }
+    }
+
+
+
+    //factorize-Вывод всех множителей числа в рекурсии
+    //concat-обьединения массивов
+
+    console.log(factorize("Множители:"+n));
+
+</script>
+</body>
+</html>

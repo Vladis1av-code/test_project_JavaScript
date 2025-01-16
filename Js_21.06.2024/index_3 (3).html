@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var numbers = prompt("Enter number between 10 and 19");
+
+    function Numbers() {
+        let num = numbers;
+
+        if (num < 10 || num > 19) {
+            alert("Error number");
+            return;
+        } else {
+
+            const mid = Math.floor(num.length / 2);
+
+            const left = num.substring(0, mid);
+            const right = num.substring(mid);
+
+
+            if (parseInt(left) > parseInt(right)) {
+                console.log("Максимальная цифра в числе: " + left);
+                console.log("Минимальная цифра в числе: " + right);
+            } else {
+                console.log("Максимальная цифра в числе: " + right);
+                console.log("Минимальная цифра в числе: " + left);
+            }
+        }
+    }
+
+    Numbers();
+</script>
+
+</body>
+</html>

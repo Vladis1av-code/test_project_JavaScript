@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input_time_hour"/>
+<input id="input_time_min"/>
+<input id="input_time_seconds">
+<button onclick="time()">Button</button>
+<script>
+
+    var Hour=parseFloat(document.getElementById("input_time_hour").value);
+    var Min=parseFloat(document.getElementById("input_time_min").value);
+    var Secound=parseFloat(document.getElementById("input_time_seconds").value);
+
+    function time(Hour, Min = 0, Second = 0) {
+        let hh = Hour < 10 ? "0" + Hour : Hour.toString();//Перебразование времени
+        let mm = Min < 10 ? "0" + Min : Min.toString();
+        let ss = Second < 10 ? "0" + Second : Second.toString();
+
+
+        let formattedTime = `${hh}:${mm}:${ss}`;//вывод
+
+        // Выводим результат
+        alert(formattedTime);
+    }
+
+</script>
+</body>
+</html>

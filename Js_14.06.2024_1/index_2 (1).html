@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+
+    // Функция для создания объекта-дроби
+    function createFraction(num, domin) {
+        return {
+            num: num,
+            domin: domin
+        };
+    }
+
+    // Функция для нахождения наибольшего общего делителя (НОД)
+    function gcd(a, b) {
+        while (b !== 0) {
+            let t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+
+    // Функция сокращения дроби
+    function simplifyFraction(fraction) {
+        let divisor = gcd(fraction.num, fraction.domin);
+        return {
+            num: fraction.num / divisor,
+            domin: fraction.domin / divisor
+        };
+    }
+
+    // Функция сложения двух дробей
+    function addFractions(fraction1, fraction2) {
+        let num = fraction1.num * fraction2.domin + fraction2.num * fraction1.domin;
+        let domin = fraction1.domin * fraction2.domin;
+        return simplifyFraction(createFraction(num, domin));
+    }
+
+    // Функция вычитания двух дробей
+    function subtractFractions(fraction1, fraction2) {
+        let num = fraction1.num * fraction2.domin - fraction2.num * fraction1.domin;
+        let domin = fraction1.domin * fraction2.domin;
+        return simplifyFraction(createFraction(num, domin));
+    }
+
+    // Функция умножения двух дробей
+    function multiplyFractions(fraction1, fraction2) {
+        let num = fraction1.num * fraction2.num;
+        let domin = fraction1.domin * fraction2.domin;
+        return simplifyFraction(createFraction(num, domin));
+    }
+
+    // Функция деления двух дробей
+    function divideFractions(fraction1, fraction2) {
+        let num = fraction1.num * fraction2.domin;
+        let domin = fraction1.domin * fraction2.num;
+        return simplifyFraction(createFraction(num, domin));
+    }
+
+    // Пример использования:
+    let fraction1 = createFraction(3, 4);
+    let fraction2 = createFraction(5, 6);
+
+    let sum = addFractions(fraction1, fraction2);
+    console.log(`Сложение: ${sum.num}/${sum.domin}`);
+
+    let difference = subtractFractions(fraction1, fraction2);
+    console.log(`Вычитание: ${difference.num}/${difference.domin}`);
+
+    let product = multiplyFractions(fraction1, fraction2);
+    console.log(`Умножение: ${product.num}/${product.domin}`);
+
+    let quotient = divideFractions(fraction1, fraction2);
+    console.log(`Деление: ${quotient.num}/${quotient.domin}`);
+
+    let simplifiedFraction = simplifyFraction(createFraction(8, 12));
+    console.log(`Сокращение: ${simplifiedFraction.num}/${simplifiedFraction.domin}`);
+
+
+
+
+</script>
+</body>
+</html>

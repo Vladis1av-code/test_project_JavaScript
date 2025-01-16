@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="print_width">
+<input id="print_height">
+<button onclick="Rectangle()">Button</button>
+<script>
+function  Rectangle() {
+    var width=parseFloat(document.getElementById("print_width").value);
+    var height=parseFloat(document.getElementById("print_height").value);
+
+    var res = width * height;
+    alert("Square:" + "" + res);
+}
+</script>
+</body>
+</html>

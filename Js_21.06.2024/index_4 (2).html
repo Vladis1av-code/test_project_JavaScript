@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var n=prompt("Enter numbers")
+
+    function JS(n, divisor = 2) {
+        // Если число меньше 2, оно не простое
+        if (n < 2) {
+            return false;
+        }
+
+        // Базовый случай: если делитель больше квадратного корня числа, оно простое
+        if (divisor > Math.sqrt(n)) {
+            return true;
+        }
+
+        // Если число делится на текущий делитель, оно не простое
+        if (n % divisor === 0) {
+            return false;
+        }
+
+        // Рекурсивный случай: проверяем с увеличенным делителем
+        return JS(n, divisor + 1);
+    }
+
+    // Пример использования:
+    console.log(JS(n)); // true (11 - простое число)
+
+JS();
+</script>
+</body>
+</html>

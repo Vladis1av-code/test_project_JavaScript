@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input_1"/>
+<input id="input_2"/>
+<input id="input_3"/>
+<button onclick="numbers()">Button</button>
+<script>
+    function numbers()
+    {
+var number_1=parseFloat(document.getElementById("input_1").value);
+var number_2=parseFloat(document.getElementById("input_2").value);
+var number_3=parseFloat(document.getElementById("input_3").value);
+
+let res2=[number_1,number_2,number_3];
+        let res = res2.join('')//delete ,
+alert(res)
+    }
+</script>
+</body>
+</html>

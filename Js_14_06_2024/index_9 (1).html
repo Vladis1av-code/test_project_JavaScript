@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input_1"/>
+<button onclick="Secound_print()">Button</button>
+<script>
+    function Secound_print() {
+        var secound = parseFloat(document.getElementById("input_1").value);
+
+if(secound != "0")
+{
+    if(secound <60)
+    {
+        alert(secound)
+    }
+ else if(secound > 60)
+{
+    res= secound / 60;
+    alert(res)
+}
+else if(secound>3600)
+{
+res_2=secound / 3600
+    alert(res_2)
+}
+}
+else
+{
+    alert("Error")
+    return;
+}
+    }
+</script>
+</body>
+</html>

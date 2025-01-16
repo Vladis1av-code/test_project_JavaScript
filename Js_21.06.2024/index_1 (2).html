@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script>
+var number = prompt("Введите число");
+var degree_number=prompt("Введите степень числа");
+
+function Numbers() {
+    let num = number;
+
+
+    function Stop_Recur(time) {
+        if (time === 0) {
+            return;//остановка рекурсии
+        }
+
+        num *= num;//умнножаем число само на себя
+        console.log(num);
+        Stop_Recur(time - 1)//вызов с уменьшением счетчика без него не будет работать
+
+    }
+    return function (time)
+    {
+        Stop_Recur(time);
+    }
+};
+Numbers(degree_number);//Пользователь указывает сколько будет вызываться
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input_year"/>
+<input id="input_motch"/>
+<input id="input_second"/>
+<button onclick="button_1()">Click</button>
+<script>
+    function button_1() {
+        const input_year = document.getElementById('input_year').value;
+        const input_motch = document.getElementById('input_motch').value;
+        const input_secound = document.getElementById('input_second').value;
+
+        var year1 = 0;
+        var motch1 = 0;
+        var secound1 = 0;
+        const time = Object.create({}, {
+            year:
+                {
+                    value: year1
+                },
+            motch:
+                {
+                    value: motch1
+                }
+            ,
+            second:
+                {
+                    value: secound1
+                }
+        })
+//1
+        for (let key in time) {
+            console.log(time[key]);
+        }
+        //2+3+4
+        var second2 = input_secound + secound1;
+        var motch2 = input_motch + motch1 + Math.floor(second2 / 60);
+        var year2 = input_year + year1 + Math.floor(motch2 / 60);
+
+        var second2=second2 % 60;//Secound
+        var motch2=motch2 % 60;//Motch
+
+        //Update
+        time.year=year2;
+        time.motch=motch2;
+        time.second=second2;
+
+        //Enter
+        console.log(`Time:<<${time.year} : ${time.motch} : ${time.second} >>`)
+    }
+</script>
+</body>
+</html>

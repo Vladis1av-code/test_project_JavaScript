@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<script>
+    const auto=Object.create({},{
+        producer:
+            {
+                value:'BMW',
+                enumerable: true
+            }
+        ,
+        model:{
+            value:'BMW 750е xDrive Седан',
+            enumerable: true
+        }
+        ,
+        Year_Release:
+            {
+                value:'2008 year',
+                enumerable: true
+            }
+        ,
+        Mean_speed:{
+            value:'100',
+            enumerable: true
+        }
+    })
+    //1
+    for(let key in auto)
+    {
+        console.log(auto[key])
+    }
+    //2
+for(let key in auto)
+{
+    if(key == 'Mean_speed')
+    {
+      res=500 / auto[key]
+        res_2=res/4
+        res_3=res_2*5
+        console.log('Ему еще надо ехать' + res_3)
+    }
+}
+</script>
+</body>
+</html>

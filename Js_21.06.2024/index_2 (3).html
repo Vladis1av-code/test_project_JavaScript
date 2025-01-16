@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    var number_1=prompt("Enter number 1");
+var number_2=prompt("Enter number 2")
+function  Divison()
+{
+    let num_1=number_1;
+let num_2=number_2;
+
+    function Max_Number_1(num_1,num_2) {
+        if (num_1 === 0) {
+            return 1; // Если b = 0, то равно a
+        }
+
+        return Max_Number_1(num_2, num_1 % num_2); // Рекурсия
+
+    }
+
+    console.log("Общий делитель:" + Max_Number_1(num_1,num_2))
+}
+
+//Вызываем  функции
+Divison();
+
+</script>
+
+</body>
+</html>
