@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Movie App</title>
+  <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<div class="header">
+  <form class="header__form">
+    <input type="text" class="header__search" placeholder="Поиск фильмов">
+  </form>
+</div>
+
+<div class="movies"></div>
+
+<div class="modal"></div>
+
+<script>
+  const API_KEY = ""; /*Ваш API - key */
+  const API_POPULAR = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=%D0%A2%D0%B8%D1%82%D0%B0%D0%BD%D0%B8%D0%BA&page=1";
+  const API_SEARCH = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
+  const API_MOVIE_DETAILS = "https://kinopoiskapiunofficial.tech/api/v2.1/films/";
+  getMovies(API_POPULAR);
+
+  async function getMovies(url) {
+    const resp = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": API_KEY,
+      },
+    });
+    const respData = await resp.json();
+    showMovies(respData);
+  }
+
+  function getClassByRate(vote) {
+    if (vote >= 7) return "green";
+    else if (vote > 5) return "orange";
+    else return "red";
+  }
+  /**/
+  // Оптимизированная функция для отображения фильмов с доменом для изображений
+  function showMovies(data) {
+    const moviesEl = document.querySelector(".movies");
+    moviesEl.innerHTML = "";
+
+    data.films.forEach((movie) => {
+      const fullPosterUrl = `https://your-image-server.com/images/${movie.posterUrl}`;
+
+      const movieEl = document.createElement("div");
+      movieEl.classList.add("movie");
+      movieEl.innerHTML = `
+                <div class="movie__cover-inner">
+                   <img src="${fullPosterUrl}" class="movie__cover" alt="${movie.nameRu}" />
+                   <div class="movie__cover--darkened"></div>
+                </div>
+                <div class="movie__info">
+                    <div class="movie__title">${movie.nameRu}</div>
+                    <div class="movie__category">${movie.genres.map(genre => genre.genre).join(', ')}</div>
+                    ${movie.rating ? `<div class="movie__average movie__average--${getClassByRate(movie.rating)}">${movie.rating}</div>` : ""}
+                </div>
+            `;
+      movieEl.addEventListener("click", () => openModal(movie.filmId));
+      moviesEl.appendChild(movieEl);
+    });
+  }
+
+  // Поиск фильмов
+  const form = document.querySelector("form");
+  const search = document.querySelector(".header__search");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const apiSearchUrl = `${API_SEARCH}${search.value}`;
+    if (search.value) {
+      getMovies(apiSearchUrl);
+      search.value = "";
+    }
+  });
+
+  // Модальное окно
+  const modalEl = document.querySelector(".modal");
+
+  async function openModal(id) {
+    const resp = await fetch(API_MOVIE_DETAILS + id, {
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": API_KEY,
+      },
+    });
+    const respData = await resp.json();
+    const movie = respData.data;
+    const fullPosterUrl = `https://your-image-server.com/images/${movie.posterUrl}`;
+
+    modalEl.classList.add("modal--show");
+    document.body.classList.add("stop-scrolling");
+
+    modalEl.innerHTML = `
+            <div class="modal__card">
+              <img src="${fullPosterUrl}" class="movie__cover" alt="" />
+                <h2>
+                    <span class="modal__movie-title">${movie.nameRu}</span>
+                    <span class="modal__movie-release-year"> - ${movie.year}</span>
+                </h2>
+                <ul class="modal__movie-info">
+                    <li class="modal__movie-genre">Жанр - ${movie.genres.map(el => `<span>${el.genre}</span>`).join(', ')}</li>
+                    ${movie.filmLength ? `<li class="modal__movie-runtime">Время - ${movie.filmLength} минут</li>` : ''}
+                    <li>Сайт: <a class="modal__movie-site" href="${movie.webUrl}">${movie.webUrl}</a></li>
+                    <li class="modal__movie-overview">Описание - ${movie.description}</li>
+                </ul>
+                <button type="button" class="modal__button-close">Закрыть</button>
+            </div>
+        `;
+
+    const btnClose = document.querySelector(".modal__button-close");
+    btnClose.addEventListener("click", closeModal);
+  }
+
+  function closeModal() {
+    modalEl.classList.remove("modal--show");
+    document.body.classList.remove("stop-scrolling");
+  }
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modalEl) closeModal();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
+</body>
+</html>
